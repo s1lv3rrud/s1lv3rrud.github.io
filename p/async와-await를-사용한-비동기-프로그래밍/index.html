@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko-KR" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="I/O\u00a0바인딩되어\u00a0오래\u00a0걸리는\u00a0작업을\u00a0수행해야\u00a0하는\u00a0경우나\u00a0큰\u00a0계산을\u00a0수행하는\u00a0것과\u00a0같이\u00a0CPU\u00a0바인딩된\u00a0작업이\u00a0존재하는\u00a0경우에는\u00a0비동기\u00a0프로그래밍을\u00a0사용한다.\u00a0C#에서는\u00a0따로\u00a0콜백\u00a0함수를\u00a0지정하지\u00a0않고도\u00a0비동기\u00a0프로그래밍이\u00a0가능하다.\n비동기 프로그래밍 Task나 Task&lt;T&gt; 개체로 비동기 프로그래밍이 가능하다. 이 개체들은 async 한정자 또는 await 연산자를 통해 사용할 수 있다.\nasync 한정자 async는\u00a0메서드를\u00a0await를\u00a0사용할\u00a0수\u00a0있는\u00a0비동기\u00a0메서드로\u00a0변환해준다.\nI/O\u00a0바인딩된\u00a0코드에서는\u00a0async\u00a0메서드의\u00a0내부에서\u00a0Task\u00a0또는\u00a0Task&lt;T&gt;\u00a0개체의\u00a0반환을\u00a0기다린다.\u00a0작업이\u00a0완료될\u00a0때까지\u00a0기다리지\u00a0않는\u00a0메서드라면\u00a0void로\u00a0선언한다.\n">
+<title>async와 await를 사용한 비동기 프로그래밍</title>
+
+<link rel='canonical' href='https://example.com/p/async%EC%99%80-await%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/'>
+
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="async와 await를 사용한 비동기 프로그래밍">
+<meta property='og:description' content="I/O\u00a0바인딩되어\u00a0오래\u00a0걸리는\u00a0작업을\u00a0수행해야\u00a0하는\u00a0경우나\u00a0큰\u00a0계산을\u00a0수행하는\u00a0것과\u00a0같이\u00a0CPU\u00a0바인딩된\u00a0작업이\u00a0존재하는\u00a0경우에는\u00a0비동기\u00a0프로그래밍을\u00a0사용한다.\u00a0C#에서는\u00a0따로\u00a0콜백\u00a0함수를\u00a0지정하지\u00a0않고도\u00a0비동기\u00a0프로그래밍이\u00a0가능하다.\n비동기 프로그래밍 Task나 Task&lt;T&gt; 개체로 비동기 프로그래밍이 가능하다. 이 개체들은 async 한정자 또는 await 연산자를 통해 사용할 수 있다.\nasync 한정자 async는\u00a0메서드를\u00a0await를\u00a0사용할\u00a0수\u00a0있는\u00a0비동기\u00a0메서드로\u00a0변환해준다.\nI/O\u00a0바인딩된\u00a0코드에서는\u00a0async\u00a0메서드의\u00a0내부에서\u00a0Task\u00a0또는\u00a0Task&lt;T&gt;\u00a0개체의\u00a0반환을\u00a0기다린다.\u00a0작업이\u00a0완료될\u00a0때까지\u00a0기다리지\u00a0않는\u00a0메서드라면\u00a0void로\u00a0선언한다.\n">
+<meta property='og:url' content='https://example.com/p/async%EC%99%80-await%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/'>
+<meta property='og:site_name' content='은경&#39;s Devlog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C#' /><meta property='article:tag' content='async' /><meta property='article:tag' content='await' /><meta property='article:published_time' content='2024-03-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-03-11T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="async와 await를 사용한 비동기 프로그래밍">
+<meta name="twitter:description" content="I/O\u00a0바인딩되어\u00a0오래\u00a0걸리는\u00a0작업을\u00a0수행해야\u00a0하는\u00a0경우나\u00a0큰\u00a0계산을\u00a0수행하는\u00a0것과\u00a0같이\u00a0CPU\u00a0바인딩된\u00a0작업이\u00a0존재하는\u00a0경우에는\u00a0비동기\u00a0프로그래밍을\u00a0사용한다.\u00a0C#에서는\u00a0따로\u00a0콜백\u00a0함수를\u00a0지정하지\u00a0않고도\u00a0비동기\u00a0프로그래밍이\u00a0가능하다.\n비동기 프로그래밍 Task나 Task&lt;T&gt; 개체로 비동기 프로그래밍이 가능하다. 이 개체들은 async 한정자 또는 await 연산자를 통해 사용할 수 있다.\nasync 한정자 async는\u00a0메서드를\u00a0await를\u00a0사용할\u00a0수\u00a0있는\u00a0비동기\u00a0메서드로\u00a0변환해준다.\nI/O\u00a0바인딩된\u00a0코드에서는\u00a0async\u00a0메서드의\u00a0내부에서\u00a0Task\u00a0또는\u00a0Task&lt;T&gt;\u00a0개체의\u00a0반환을\u00a0기다린다.\u00a0작업이\u00a0완료될\u00a0때까지\u00a0기다리지\u00a0않는\u00a0메서드라면\u00a0void로\u00a0선언한다.\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3996315455155259031.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">은경&#39;s Devlog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/s1lv3rrud'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.linkedin.com/in/eungyeong-lee-45315a293/'
+                        target="_blank"
+                        title="LinkedIn"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="32" height="32" viewBox="0 0 32 32" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+<rect x="7" y="13" class="st0" width="4" height="12"/>
+<path class="st0" d="M20.5,13c-0.9,0-1.8,0.3-2.5,0.8V13h-4v12h2h2v-6.5c0-0.8,0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5V25h4v-7.5
+	C25,15,23,13,20.5,13z"/>
+<circle class="st0" cx="9" cy="8" r="2"/>
+</svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">목차</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#비동기-프로그래밍">비동기 프로그래밍</a>
+      <ol>
+        <li><a href="#async-한정자">async 한정자</a></li>
+        <li><a href="#await-연산자">await 연산자</a></li>
+        <li><a href="#사용-예제"><strong>사용 예제</strong></a></li>
+      </ol>
+    </li>
+    <li><a href="#io-binding-vs-cpu-binding">I/O binding vs CPU binding</a></li>
+    <li><a href="#-참고-">[ 참고 ]</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/c%23/" >
+                C#
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/async%EC%99%80-await%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/">async와 await를 사용한 비동기 프로그래밍</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 11, 2024</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>I/O 바인딩되어 오래 걸리는 작업을 수행해야 하는 경우나 큰 계산을 수행하는 것과 같이 CPU 바인딩된 작업이 존재하는 경우에는 비동기 프로그래밍을 사용한다. C#에서는 따로 콜백 함수를 지정하지 않고도 비동기 프로그래밍이 가능하다.</p>
+<hr>
+<h2 id="비동기-프로그래밍">비동기 프로그래밍
+</h2><p><code>Task</code>나 <code>Task&lt;T&gt;</code> 개체로 비동기 프로그래밍이 가능하다. 이 개체들은 <code>async</code> 한정자 또는 <code>await</code> 연산자를 통해 사용할 수 있다.</p>
+<h3 id="async-한정자">async 한정자
+</h3><p><code>async</code>는 메서드를 <code>await</code>를 사용할 수 있는 비동기 메서드로 변환해준다.<br>
+I/O 바인딩된 코드에서는 <code>async</code> 메서드의 내부에서 <code>Task</code> 또는 <code>Task&lt;T&gt;</code> 개체의 반환을 기다린다. 작업이 완료될 때까지 기다리지 않는 메서드라면 void로 선언한다.</p>
+<blockquote>
+<p><code>Task</code> 또는 <code>Task&lt;T&gt;</code> 형식의 메소드<br>
+- <code>await</code> 연산자의 위치에 도달하면 호출자에게 제어를 돌려준다.<br>
+=&gt; <code>await</code> 연산자를 찾지 못하면 동기로 실행된다.</p>
+<p><code>void</code> 형식의 메소드<br>
+- 메서드 호출 즉시 호출자에게 제어를 돌려준다.<br>
+- <code>await</code> 연산자를 찾지 못해도 비동기적으로 실행된다.<br>
+=&gt; <code>async</code> 하나만으로 비동기 처리가 가능하다.</p>
+</blockquote>
+<p>CPU 바인딩된 코드에서는 <code>Task.Run</code> 메서드로 작업이 백그라운드 스레드에서 시작되기를 기다린다.</p>
+<h3 id="await-연산자">await 연산자
+</h3><p><code>await</code>는 비동기 메서드 내부에서만 사용할 수 있다. <code>await</code>를 수행한 메서드의 호출자에게 제어를 넘김으로서 UI를 부드럽게 만들어준다. 컴파일러가 await에 도달할 때 실행을 양도하고, 백그라운드 작업이 완료될 때 다시 실행하는 시스템으로 변환되는데, 이론적으로 <code>promise</code>와 같은 원리이다.</p>
+<h3 id="사용-예제"><strong>사용 예제</strong>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">async</span> <span class="k">void</span> <span class="n">AsyncMethod</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="n">Run</span><span class="p">(</span><span class="kd">async</span><span class="p">()</span> <span class="p">=</span> <span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 작업 내용</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="m">100</span><span class="p">);</span> <span class="c1">// Thread.Sleep()의 비동기 버전</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 코드에서 정의된 메서드를 호출하면 호출자의 제어가 <code>AsyncMethod()</code>로 이동하고, <code>await</code>에 도달하면 다시 호출자로 제어가 이동한다.</p>
+<hr>
+<h2 id="io-binding-vs-cpu-binding">I/O binding vs CPU binding
+</h2><blockquote>
+<p>코드가 DB의 데이터와 같은 무엇인가를 기다린다 → I/O 바인딩 작업<br>
+코드가 비용이 높은 계산을 수행한다 → CPU 바인딩 작업</p>
+</blockquote>
+<p><strong>I/O 바인딩된 작업을 비동기 처리하는 경우</strong></p>
+<ul>
+<li><code>Task.Run</code> 없이 <code>async</code> 및 <code>await</code>를 사용한다.</li>
+</ul>
+<p><strong>CPU에 바인딩되어 있는 작업을 비동기 처리하는 경우</strong></p>
+<ul>
+<li>다른 <code>async</code> 스레드에서 <code>Task.Run</code> 메서드를 사용하여 해당 작업을 백그라운드 스레드에서 시작한다.</li>
+</ul>
+<hr>
+<h2 id="-참고-">[ 참고 ]
+</h2><p>[<a class="link" href="https://learn.microsoft.com/ko-kr/dotnet/csharp/asynchronous-programming/async-scenarios"  target="_blank" rel="noopener"
+    >Microsoft 비동기 프로그래밍 시나리오</a>]</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c%23/">C#</a>
+        
+            <a href="/tags/async/">Async</a>
+        
+            <a href="/tags/await/">Await</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 이은경
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
