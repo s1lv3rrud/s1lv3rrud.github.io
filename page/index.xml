@@ -7,41 +7,93 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ko-KR</language>
         <copyright>이은경</copyright>
-        <lastBuildDate>Tue, 28 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 19 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>About</title>
+        <link>https://example.com/about/</link>
+        <pubDate>Tue, 19 Nov 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/about/</guid>
+        <description>&lt;h2 id=&#34;-about-me-&#34;&gt;🍑 About me! 🍑
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;img src=&#34;Header.png&#34; alt=&#34;Header&#34; style=&#34;width:600px;&#34;/&gt;
+&lt;p&gt;🎂 2002.06.25&lt;/p&gt;
+&lt;p&gt;🎓 &lt;strong&gt;CSE, Sejong University&lt;/strong&gt;&lt;br&gt;
+2021.03. ~ 2025.02.&lt;br&gt;
+Double Major in Intelligent Mechatronics Engineering&lt;/p&gt;
+&lt;p&gt;🏥 &lt;strong&gt;Raywatt Inc.&lt;/strong&gt;&lt;br&gt;
+2022.09. ~ 2024.08.&lt;br&gt;
+Windows Application Development(using C# and C++)&lt;/p&gt;
+&lt;p&gt;⛅️ &lt;strong&gt;KakaoTech Bootcamp FullStack 1st Cohort&lt;/strong&gt;&lt;br&gt;
+2024.07. ~ 2024.12.&lt;br&gt;
+Web Frontend Development (using React.js and Next.js)&lt;/p&gt;
+&lt;p&gt;🔒 &lt;strong&gt;SSG, Sejong Security Group&lt;/strong&gt;&lt;br&gt;
+2022.03. ~ 2025.02.&lt;/p&gt;
+&lt;p&gt;🌱 &lt;strong&gt;Seeds&lt;/strong&gt;&lt;br&gt;
+2024.03. ~ 2024.12.&lt;br&gt;
+Web Frontend Development (using Next.js)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://solved.ac/s1lv3rrud&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;http://mazassumnida.wtf/api/mini/generate_badge?boj=s1lv3rrud&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Solved.ac&#34;
+	
+	
+&gt;&lt;/a&gt;
+&lt;a href=&#34;https://hits.seeyoufarm.com&#34;&gt;&lt;img src=&#34;https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fs1lv3rrud&amp;count_bg=%23FF9494&amp;title_bg=%23FFA4A4&amp;icon=github.svg&amp;icon_color=%23FFFFFF&amp;title=hits&amp;edge_flat=false&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-tech-stack-&#34;&gt;🖥️ Tech Stack 🖥️
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;div&gt;
+ &lt;!-- Backend Technologies --&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/.NET-5C2D91?style=flat&amp;logo=.net&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/C%23-239120?style=flat&amp;logo=c-sharp&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/C%2B%2B-00599C?style=flat&amp;logo=c%2B%2B&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/Visual%20Studio-%235C2D91.svg?&amp;style=flat&amp;logo=visual%20studio&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/Visual%20Studio%20code-%23007ACC.svg?&amp;style=flat&amp;logo=visual%20studio%20code&amp;logoColor=white&#34; /&gt;
+ &lt;!-- Frontend Technologies --&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/Next.js-000?logo=nextdotjs&amp;logoColor=fff&amp;style=flat&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/React-20232A?style=flat&amp;logo=react&amp;logoColor=61DAFB&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/React_Native-20232A?style=flat&amp;logo=react&amp;logoColor=61DAFB&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&amp;logo=JavaScript&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/TypeScript-007ACC?style=flat&amp;logo=typescript&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?&amp;style=flate&amp;logo=tailwind%20css&amp;logoColor=white&#34; /&gt;
+ &lt;!-- Databases --&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/MySQL-00000F?style=flat&amp;logo=mysql&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/PostgreSQL-316192?style=flat&amp;logo=postgresql&amp;logoColor=white&#34; /&gt;
+ &lt;!-- Hardware &amp; Others --&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/-Arduino-00979D?style=flat&amp;logo=Arduino&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/git-%23F05032.svg?&amp;style=flat&amp;logo=git&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/GitHub-100000?style=flat&amp;logo=github&amp;logoColor=white&#34; /&gt;
+ &lt;img src=&#34;https://img.shields.io/badge/Jira-0052CC?style=flat&amp;logo=Jira&amp;logoColor=white&#34; /&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;-projects-&#34;&gt;📖 Projects 📖
+&lt;/h2&gt;&lt;h2 id=&#34;-certificate-&#34;&gt;📚 Certificate 📚
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Engineer Information Processing&lt;/strong&gt; 2024.06.18.&lt;br&gt;
+&lt;strong&gt;SQL Developer&lt;/strong&gt; 2024.08.24.&lt;br&gt;
+&lt;strong&gt;OPIc IM2&lt;/strong&gt; 2024.08.31.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;img src=&#34;https://github-readme-stats-mu-sooty-94.vercel.app/api?username=s1lv3rrud&amp;theme=rose&amp;show_icons=true&amp;count_private=true&#34; alt=&#34;GitHub stats&#34;/&gt;
+&lt;a href=&#34;https://github.com/devxb/gitanimals&#34;&gt;
+&lt;img
+  src=&#34;https://render.gitanimals.org/farms/s1lv3rrud&#34;
+  width=&#34;600&#34;
+  height=&#34;300&#34;
+/&gt;
+&lt;/a&gt;
+</description>
+        </item>
+        <item>
         <title>Archives</title>
         <link>https://example.com/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/archives/</guid>
         <description></description>
-        </item>
-        <item>
-        <title>About</title>
-        <link>https://example.com/about/</link>
-        <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://example.com/about/</guid>
-        <description>&lt;p&gt;Written in Go, Hugo is an open source static site generator available under the &lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugo/blob/master/LICENSE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Apache License 2.0.&lt;/a&gt; Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.&lt;/p&gt;
-&lt;p&gt;Hugo makes use of a variety of open source projects including:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/yuin/goldmark&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/yuin/goldmark&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/alecthomas/chroma&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/alecthomas/chroma&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/muesli/smartcrop&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/muesli/smartcrop&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/spf13/cobra&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/spf13/cobra&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/spf13/viper&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/spf13/viper&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.&lt;/p&gt;
-&lt;p&gt;Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.&lt;/p&gt;
-&lt;p&gt;Websites built with Hugo are extremely fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.&lt;/p&gt;
-&lt;p&gt;Learn more and contribute on &lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</description>
         </item>
         <item>
         <title>Links</title>

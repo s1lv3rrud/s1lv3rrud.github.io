@@ -13,7 +13,7 @@
         <pubDate>Sun, 14 Jul 2024 00:54:16 +0900</pubDate>
         
         <guid>https://example.com/p/notion-%EB%85%B8%EC%85%98-%EC%83%9D%EC%84%B1-%EC%9D%BC%EC%8B%9C-%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0/</guid>
-        <description>&lt;img src="https://example.com/images/notion/modify-createdAt/2-1.png" alt="Featured image of post [Notion] 노션 생성 일시 수정하기" /&gt;&lt;p&gt;노션의 생성 일시는 자동으로 값이 할당되며, 수정이 불가능하다.&lt;/p&gt;
+        <description>&lt;img src="https://example.com/p/notion-%EB%85%B8%EC%85%98-%EC%83%9D%EC%84%B1-%EC%9D%BC%EC%8B%9C-%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0/2-1.png" alt="Featured image of post [Notion] 노션 생성 일시 수정하기" /&gt;&lt;p&gt;노션의 생성 일시는 자동으로 값이 할당되며, 수정이 불가능하다.&lt;/p&gt;
 &lt;p&gt;하지만 데이터베이스를 사용하다가 중간에 생성 일시를 도입하거나, 생성 일시를 수정하고 싶은 경우가 생긴다.&lt;/p&gt;
 &lt;h2 id=&#34;노션-생성-일시-수정하기&#34;&gt;노션 생성 일시 수정하기
 &lt;/h2&gt;&lt;h5 id=&#34;1-생성-일시-날짜-수식-속성을-하나씩-만든다&#34;&gt;&lt;strong&gt;1. 생성 일시, 날짜, 수식 속성을 하나씩 만든다.&lt;/strong&gt;
@@ -21,7 +21,7 @@
 &lt;h5 id=&#34;2-수식에-if날짜-날짜-생성-일시를-입력한다&#34;&gt;&lt;strong&gt;2. 수식에 if(날짜, 날짜, 생성 일시)를 입력한다.&lt;/strong&gt;
 &lt;/h5&gt;&lt;figure class=&#34;image-caption&#34;&gt;
   &lt;img
-    src=&#34;https://example.com/images/notion/modify-createdAt/2-1.png&#34;
+    src=&#34;2-1.png&#34;
     alt=&#34;Image&#34;
     style=&#34;width: 100%;&#34;
   /&gt;&lt;/figure&gt;
@@ -30,7 +30,7 @@
 &lt;p&gt;날짜와 생성 일시를 입력할 때에는 수식 입력란 아래의 속성에서 선택하면 된다.&lt;/p&gt;
 &lt;figure class=&#34;image-caption&#34;&gt;
   &lt;img
-    src=&#34;https://example.com/images/notion/modify-createdAt/2-2.png&#34;
+    src=&#34;2-2.png&#34;
     alt=&#34;Image&#34;
     style=&#34;width: 40%;&#34;
   /&gt;&lt;/figure&gt;
@@ -38,7 +38,7 @@
 &lt;h5 id=&#34;3-변경하려는-행에-변경하고자-하는-날짜를-입력하여-수식값이-제대로-들어가는지-확인한다&#34;&gt;&lt;strong&gt;3. 변경하려는 행에 변경하고자 하는 날짜를 입력하여 수식값이 제대로 들어가는지 확인한다.&lt;/strong&gt;
 &lt;/h5&gt;&lt;p&gt;&lt;figure class=&#34;image-caption&#34;&gt;
   &lt;img
-    src=&#34;https://example.com/images/notion/modify-createdAt/3.png&#34;
+    src=&#34;3.png&#34;
     alt=&#34;Image&#34;
     style=&#34;width: 100%;&#34;
   /&gt;&lt;/figure&gt;
@@ -49,7 +49,7 @@
 &lt;p&gt;캘린더 보기를 생성하고, 우측의 &amp;hellip; -&amp;gt; 레이아웃을 클릭하고, 캘린더 표시 기준 보기를 생성일로 선택해준다.&lt;/p&gt;
 &lt;p&gt;&lt;figure class=&#34;image-caption&#34;&gt;
   &lt;img
-    src=&#34;https://example.com/images/notion/modify-createdAt/4.png&#34;
+    src=&#34;4.png&#34;
     alt=&#34;Image&#34;
     style=&#34;width: 100%;&#34;
   /&gt;&lt;/figure&gt;
